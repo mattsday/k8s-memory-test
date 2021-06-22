@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uneven-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uneven-test
+  template:
+    metadata:
+      labels:
+        app: uneven-test
+    spec:
+      containers:
+        - name: uneven-test
+          image: eu.gcr.io/crisp-retail-demo/stress-test:v4
+          imagePullPolicy: Always
+          env:
+            - name: VM_BYTES
+              # This is set to the limit, not the request
+              value: 2.9G
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: 1Gi
+              cpu: 0.1
+            limits:
+              memory: 3Gi
+              cpu: 2

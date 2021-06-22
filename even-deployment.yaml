@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: even-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: even-test
+  template:
+    metadata:
+      labels:
+        app: even-test
+    spec:
+      containers:
+        - name: even-test
+          image: eu.gcr.io/crisp-retail-demo/stress-test:v4
+          imagePullPolicy: Always
+          env:
+            - name: VM_BYTES
+              # This is set to the request (which == limit)
+              value: 1.4G
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: 1Gi
+              cpu: 0.1
+            limits:
+              memory: 1Gi
+              cpu: 2
