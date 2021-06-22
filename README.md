@@ -1,4 +1,4 @@
-# Memory vs Requests
+# Memory Limits vs Requests
 
 This is a simple demo to show what happens if you set different requests and limits for memory and the scheduler needs to place a workload.
 
